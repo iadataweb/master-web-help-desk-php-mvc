@@ -170,6 +170,7 @@ Ingresa en la carpeta 'Config'y abre el archivo 'System.php' y edita las credenc
 4. **Configurar el archivo `.env`**
 - Crea un archivo llamado `.env` en la raíz del proyecto.
 - Añade las siguientes líneas y reemplaza con tu propio correo de Gmail y la contraseña de aplicación generada:
+
     ```env
     # CUENTA DE ACCESO PARA EL ENVÍO DE CORREO
     EMAIL_USERNAMER="su_correo@gmail.com"
