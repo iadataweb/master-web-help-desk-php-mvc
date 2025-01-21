@@ -48,7 +48,7 @@ CREATE TABLE controls (
     FOREIGN KEY (id_module_control) REFERENCES modules(id_module)
 );
 
--- Crear tabla para registrar permisos adicionales de Sí/No
+-- Crear tabla para registrar permisos adicionales
 CREATE TABLE additional_permissions (
     id_additional_permission INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     id_role_additional_permission INT NOT NULL,
@@ -322,10 +322,12 @@ INSERT INTO users (
     status_active_user, 
     status_deleted_user, 
     date_created_user) VALUES 
-(1, 1, 'Ismael Super 1', 'Injante', '111111111', 'super_administrator@example.com', '$2y$10$ZTsNuxjSBK6j.xrFLA49pepFGtNylTEJIVNR8h9GKqPGO9kxCSdoe', 1, 0, '2024-12-01 12:00:00'),
-(2, 2, 'Ismael Admin 1', 'Injante', '111111111', 'administrator@example.com', '$2y$10$ZTsNuxjSBK6j.xrFLA49pepFGtNylTEJIVNR8h9GKqPGO9kxCSdoe', 1, 0, '2024-12-01 12:00:00'),
-(3, 3, 'Ismael Soporte 1', 'Injante', '111111111', 'support@example.com', '$2y$10$ZTsNuxjSBK6j.xrFLA49pepFGtNylTEJIVNR8h9GKqPGO9kxCSdoe', 1, 0, '2024-12-01 12:00:00'),
-(4, 4, 'Ismael Usuario 1', 'Injante', '111111111', 'end_user@example.com', '$2y$10$ZTsNuxjSBK6j.xrFLA49pepFGtNylTEJIVNR8h9GKqPGO9kxCSdoe', 1, 0, '2024-12-01 12:00:00');
+(1, 1, 'Carlos Kirito', 'Injante', '111111111', 'carlos.kirito@example.com', '$2y$10$ZTsNuxjSBK6j.xrFLA49pepFGtNylTEJIVNR8h9GKqPGO9kxCSdoe', 1, 0, '2024-12-01 12:00:00'),
+(2, 2, 'Ana Sakura', 'Sánchez', '111111111', 'ana.sakura@example.com', '$2y$10$ZTsNuxjSBK6j.xrFLA49pepFGtNylTEJIVNR8h9GKqPGO9kxCSdoe', 1, 0, '2024-12-01 12:00:00'),
+(3, 3, 'Luis Saitama', 'García', '111111111', 'luis.saitama@example.com', '$2y$10$ZTsNuxjSBK6j.xrFLA49pepFGtNylTEJIVNR8h9GKqPGO9kxCSdoe', 1, 0, '2024-12-01 12:00:00'),
+(4, 3, 'Pedro Goku', 'Torres', '111111111', 'pedro.goku@example.com', '$2y$10$ZTsNuxjSBK6j.xrFLA49pepFGtNylTEJIVNR8h9GKqPGO9kxCSdoe', 1, 0, '2024-12-01 12:00:00'),
+(5, 4, 'Miguel Luffy', 'Flores', '111111111', 'miguel.luffy@example.com', '$2y$10$ZTsNuxjSBK6j.xrFLA49pepFGtNylTEJIVNR8h9GKqPGO9kxCSdoe', 1, 0, '2024-12-01 12:00:00'),
+(6, 4, 'María Hinata', 'Pérez', '111111111', 'maria.hinata@example.com', '$2y$10$ZTsNuxjSBK6j.xrFLA49pepFGtNylTEJIVNR8h9GKqPGO9kxCSdoe', 1, 0, '2024-12-01 12:00:00');
 
 -- Insertar datos en la tabla 'categorías'
 INSERT INTO categories (
@@ -377,3 +379,38 @@ INSERT INTO priorities (
 (1, 'Bajo', 1, 0, '2024-12-01 12:00:00'),
 (2, 'Medio', 1, 0, '2024-12-01 12:00:00'),
 (3, 'Alto', 1, 0, '2024-12-01 12:00:00');
+
+-- Insertar datos en la tabla 'tickets'
+INSERT INTO tickets (
+    id_ticket, 
+    id_user_ticket, 
+    id_support_assigned_ticket, 
+    id_category_ticket, 
+    id_subcategory_ticket, 
+    id_priority_ticket, 
+    title_ticket, 
+    description_ticket, 
+    status_open_ticket, 
+    date_created_ticket,
+    date_updated_ticket,
+    date_assigned_ticket, 
+    date_closed_ticket) VALUES 
+(1, 5, 3, 1, 1, 2, 'Teclado no responde', 'Mi teclado no quiere funcionar, ni reiniciando la compu. ¿Podrían ayudarme a revisarlo, porfa?', 0, '2024-12-06 10:05:00', '2024-12-06 10:05:00', '2024-12-06 11:30:00', '2024-12-06 12:20:00'),
+(2, 6, 4, 1, 2, 3, 'Monitor con pantalla parpadeante', 'El monitor está parpadeando a cada rato, no puedo trabajar así. Creo que es la conexión o algo más grave. ¿Me dan una mano?', 0, '2024-12-07 09:14:00', '2024-12-07 09:14:00', '2024-12-07 09:20:00', '2024-12-07 10:10:00'),
+(3, 5, 4, 1, 15, 3, 'Problemas de conectividad Wi-Fi', 'La señal de Wi-Fi se va y viene, no sé si es el router o la compu. ¿Podrían revisar, por favor?', 0, '2024-12-21 09:53:00', '2024-12-21 09:53:00', '2024-12-21 10:17:00', '2024-12-21 11:22:00'),
+(4, 6, NULL, 2, 17, 1, 'Actualización de Office necesaria', 'Necesito actualizar mi Office para que no me falle en las presentaciones. ¿Alguien puede echarme una mano con eso?', 1, '2024-12-23 09:36:00', '2024-12-23 09:36:00', NULL, NULL);
+
+-- Insertar datos en la tabla 'mensajes'
+INSERT INTO messages (
+    id_message, 
+    id_ticket_message, 
+    id_user_message, 
+    content_message, 
+    date_created_message, 
+    date_updated_message) VALUES 
+(1, 1, 3, 'Hemos recibido tu reporte sobre el teclado que no responde. Estamos trabajando en ello y pronto te daremos una actualización.', '2024-12-06 11:45:00', '2024-12-06 11:45:00'),
+(2, 1, 3, 'El teclado defectuoso ha sido reemplazado y ahora funciona correctamente.', '2024-12-06 12:18:00', '2024-12-06 12:18:00'),
+(3, 2, 4, 'Gracias por informarnos sobre el problema con tu monitor. Estamos verificando la conexión y pronto te daremos una solución.', '2024-12-07 09:38:00', '2024-12-07 09:38:00'),
+(4, 2, 4, 'El cable de conexión estaba suelto. Hemos ajustado la conexión y el monitor ya no parpadea.', '2024-12-07 10:08:00', '2024-12-07 10:08:00'),
+(5, 3, 4, 'Entendido, estamos revisando los problemas de conectividad Wi-Fi. Te mantendremos informado con los resultados.', '2024-12-21 10:27:00', '2024-12-21 10:27:00'),
+(6, 3, 4, 'Hemos reiniciado el router y actualizado los controladores de red en tu equipo. La conexión Wi-Fi ahora es estable.', '2024-12-21 11:20:00', '2024-12-21 11:20:00');
