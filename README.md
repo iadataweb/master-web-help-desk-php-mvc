@@ -165,7 +165,7 @@ Sigue estos pasos para instalar y configurar el sistema web de Help Desk:
 - Pega la consulta copiada en el editor de SQL y haz clic en Continuar para crear las tablas y registros iniciales.
 
 3. **Configurar el archivo de conexión**
-    Ingresa en la carpeta 'Config'y abre el archivo 'System.php' y edita las credenciales de la base de datos según tu configuración local (nombre de host, usuario, contraseña).
+- Ingresa en la carpeta 'Config'y abre el archivo 'System.php' y edita las credenciales de la base de datos según tu configuración local (nombre de host, usuario, contraseña).
 
 4. **Configurar el archivo `.env`**
 - Crea un archivo llamado `.env` en la raíz del proyecto.
