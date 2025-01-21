@@ -117,10 +117,12 @@ Si tienes alguna sugerencia que pueda mejorar esto, crea un fork del repositorio
 
 2. **Crea una Rama para tu Funcionalidad**
     - Crea una nueva rama para la funcionalidad que desees agregar o el error que quieras corregir. El nombre de la rama debe estar en inglés y seguir la convención `feature/nombre-de-la-funcionalidad` para nuevas funcionalidades o `bugfix/nombre-del-error` para correcciones de errores. Por ejemplo:
+
         ```bash
         git checkout -b feature/new-dashboard
         ```
         o
+
         ```bash
         git checkout -b bugfix/fix-login-issue
         ```
@@ -130,12 +132,14 @@ Si tienes alguna sugerencia que pueda mejorar esto, crea un fork del repositorio
 
 4. **Haz Commit de tus Cambios**
     - Después de realizar los cambios, confirma los mismos con un mensaje claro que explique lo que se ha modificado:
+
         ```bash
         git commit -m 'Agregar nueva funcionalidad para el dashboard'
         ```
 
 5. **Sube tus Cambios**
     - Sube tus cambios a tu repositorio de GitHub:
+    
         ```bash
         git push origin feature/new-dashboard
         ```
