@@ -128,7 +128,7 @@ Si tienes alguna sugerencia que pueda mejorar esto, crea un fork del repositorio
         ```
 
 3. **Realiza los Cambios**
-- Realiza los cambios necesarios en el código o agrega nuevas funcionalidades.
+    - Realiza los cambios necesarios en el código o agrega nuevas funcionalidades.
 
 4. **Haz Commit de tus Cambios**
     - Después de realizar los cambios, confirma los mismos con un mensaje claro que explique lo que se ha modificado:
@@ -158,29 +158,29 @@ Sigue estos pasos para instalar y configurar el sistema web de Help Desk:
     ```
 
 2. **Configurar la base de datos**
-- Crea una nueva base de datos en tu servidor MySQL llamada master_help_desk_001.
-- Ve a la carpeta 'Database' y abre el archivo 'master_help_desk_001.sql'.
-- Copia el contenido del archivo.
-- Abre phpMyAdmin, selecciona la base de datos master_help_desk_001 y dirígete a la pestaña SQL.
-- Pega la consulta copiada en el editor de SQL y haz clic en Continuar para crear las tablas y registros iniciales.
+    - Crea una nueva base de datos en tu servidor MySQL llamada master_help_desk_001.
+    - Ve a la carpeta 'Database' y abre el archivo 'master_help_desk_001.sql'.
+    - Copia el contenido del archivo.
+    - Abre phpMyAdmin, selecciona la base de datos master_help_desk_001 y dirígete a la pestaña SQL.
+    - Pega la consulta copiada en el editor de SQL y haz clic en Continuar para crear las tablas y registros iniciales.
 
 3. **Configurar el archivo de conexión**
     - Ingresa en la carpeta 'Config'y abre el archivo 'System.php' y edita las credenciales de la base de datos según tu configuración local (nombre de host, usuario, contraseña).
 
 4. **Configurar el archivo `.env`**
-- Crea un archivo llamado `.env` en la raíz del proyecto.
-- Añade las siguientes líneas y reemplaza con tu propio correo de Gmail y la contraseña de aplicación generada:
+    - Crea un archivo llamado `.env` en la raíz del proyecto.
+    - Añade las siguientes líneas y reemplaza con tu propio correo de Gmail y la contraseña de aplicación generada:
 
-    ```env
-    # CUENTA DE ACCESO PARA EL ENVÍO DE CORREO
-    EMAIL_USERNAMER="su_correo@gmail.com"
-    EMAIL_PASSWORDR="contraseña_de_aplicación"
-    ```
-- **Nota**: Es importante usar una **contraseña de aplicación** en lugar de tu contraseña habitual de Gmail por motivos de seguridad. Puedes generar una contraseña de aplicación siguiendo este [tutorial en YouTube](https://youtu.be/cygY1sCjLxA).
+        ```env
+        # CUENTA DE ACCESO PARA EL ENVÍO DE CORREO
+        EMAIL_USERNAMER="su_correo@gmail.com"
+        EMAIL_PASSWORDR="contraseña_de_aplicación"
+        ```
+    - **Nota**: Es importante usar una **contraseña de aplicación** en lugar de tu contraseña habitual de Gmail por motivos de seguridad. Puedes generar una contraseña de aplicación siguiendo este [tutorial en YouTube](https://youtu.be/cygY1sCjLxA).
 
 5. **Ejecutar el servidor**
-- Inicia tu servidor web local (por ejemplo, XAMPP o WAMP) y asegúrate de que el servicio MySQL esté corriendo.
-- Accede a la aplicación a través de tu navegador en 'http://localhost/master-web-help-desk-php-mvc'.
+    - Inicia tu servidor web local (por ejemplo, XAMPP o WAMP) y asegúrate de que el servicio MySQL esté corriendo.
+    - Accede a la aplicación a través de tu navegador en 'http://localhost/master-web-help-desk-php-mvc'.
 
 ¡Listo! Ahora deberías poder utilizar el sistema web de Help Desk.
 
