@@ -1,1 +1,5 @@
 .env
+# Excluir tambien System.php
+Config/System.php
+
+
