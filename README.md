@@ -165,17 +165,14 @@ Sigue estos pasos para instalar y configurar el sistema web de Help Desk:
     - Pega la consulta copiada en el editor de SQL y haz clic en Continuar para crear las tablas y registros iniciales.
 
 3. **Configurar el archivo de conexión**
-    - Ingresa en la carpeta 'Config'y abre el archivo 'System.php' y edita las credenciales de la base de datos según tu configuración local (nombre de host, usuario, contraseña).
+    - Ingresa en la carpeta `Config` y abre el archivo `System.example.php`.
+    - Completa los valores con la configuración real del sistema.
+    - Renombra el archivo llamado `System.example.php` a `System.php`.
 
 4. **Configurar el archivo `.env`**
-    - Crea un archivo llamado `.env` en la raíz del proyecto.
-    - Añade las siguientes líneas y reemplaza con tu propio correo de Gmail y la contraseña de aplicación generada:
-
-        ```env
-        # CUENTA DE ACCESO PARA EL ENVÍO DE CORREO
-        EMAIL_USERNAMER="su_correo@gmail.com"
-        EMAIL_PASSWORDR="contraseña_de_aplicación"
-        ```
+    - Ingresa a un archivo llamado `.env.example` en la raíz del proyecto.
+    - Reemplaza con tu propio correo de Gmail y la contraseña de aplicación generada.
+    - Renombra el archivo llamado `.env.example` a `.env`.
     - **Nota**: Es importante usar una **contraseña de aplicación** en lugar de tu contraseña habitual de Gmail por motivos de seguridad. Puedes generar una contraseña de aplicación siguiendo este [tutorial en YouTube](https://youtu.be/cygY1sCjLxA).
 
 5. **Ejecutar el servidor**
