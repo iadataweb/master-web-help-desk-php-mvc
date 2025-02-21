@@ -1,10 +1,10 @@
 <?php 
     /* 
-     * Archivo de Ejemplo de Configuración del Sistema
-     * Renombrar este archivo a System.php y completar con sus valores reales
-     */
+    * Archivo de Ejemplo de Configuración del Sistema
+    * Renombrar este archivo a System.php y completar con sus valores reales
+    */
 
-    // URL Base para la aplicación
+    // Configuración de url base del Sistema Web
     const BASE_URL = "";
 
     // Configuración de Zona Horaria
@@ -26,7 +26,7 @@
     const MODULE_SUBCATEGORY_MANAGEMENT = 6;
     const MODULE_PRIORITY_MANAGEMENT = 7;
 
-    // Tipos de Usuario
+    // Identificador de Usuario Super Administrador
     const USER_SUPER_ADMINISTRATOR = 1;
 
     // Roles del Sistema
