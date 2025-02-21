@@ -26,7 +26,7 @@
     const MODULE_SUBCATEGORY_MANAGEMENT = 6;
     const MODULE_PRIORITY_MANAGEMENT = 7;
 
-    // Identificador de Usuario Super Administrador
+    // Identificador del Usuario Super Administrador
     const USER_SUPER_ADMINISTRATOR = 1;
 
     // Roles del Sistema
