@@ -31,16 +31,22 @@
 			$sql = "SELECT u.first_names_user, u.last_names_user, u.cell_phone_user, u.email_user, u.status_active_user, r.id_role, r.name_role
 					FROM users u 
 					INNER JOIN roles r ON u.id_role_user = r.id_role
-					WHERE u.id_user = $this->int_id_user AND u.status_deleted_user = 0";
-			$request = $this->select($sql);
+					WHERE u.id_user = ? AND u.status_deleted_user = 0";
+			$data = [
+				$this->int_id_user
+			];
+			$request = $this->select($sql, $data);
 			return $request;
 		}
 
 		public function check_email_exists(string $email_user)
 		{
 			$this->str_email_user = $email_user;
-			$sql = "SELECT * FROM users WHERE email_user = '$this->str_email_user'";
-			$request = $this->select($sql);
+			$sql = "SELECT * FROM users WHERE email_user = ?";
+			$data = [
+				$this->str_email_user
+			];
+			$request = $this->select($sql, $data);
 			return $request;
 		}
 
@@ -49,9 +55,12 @@
 			$this->int_id_user = $id_user;
 			$sql = "SELECT status_active_user 
 					FROM users 
-					WHERE id_user = $this->int_id_user 
+					WHERE id_user = ? 
 					AND status_deleted_user = 0";
-			$request = $this->select($sql);
+			$data = [
+				$this->int_id_user
+			];
+			$request = $this->select($sql, $data);
 			return $request;
 		}
 
@@ -64,7 +73,7 @@
 			$this->int_id_role_user = $id_role_user;
 			$this->int_status_active_user = $status_active_user;
 			$query_insert = "INSERT INTO users(id_role_user, first_names_user, last_names_user, cell_phone_user, email_user, password_user, status_active_user) VALUES(?,?,?,?,?,?,?)";
-			$data = array(
+			$data = [
 				$this->int_id_role_user,
 				$this->str_first_names_user,
 				$this->str_last_names_user,
@@ -72,7 +81,7 @@
 				$this->str_email_user,
 				$this->str_password_user,
 				$this->int_status_active_user
-			);
+			];
 			$request_insert = $this->insert($query_insert, $data);
 	        $return = $request_insert;
 	        return $return;
@@ -96,16 +105,17 @@
 								email_user = ?, 
 								password_user = ?, 
 								status_active_user = ? 
-							WHERE id_user = $this->int_id_user";
-				$data = array(
+							WHERE id_user = ?";
+				$data = [
 					$this->int_id_role_user,
 					$this->str_first_names_user,
 					$this->str_last_names_user,
 					$this->str_cell_phone_user,
 					$this->str_email_user,
 					$this->str_password_user,
-					$this->int_status_active_user
-				);
+					$this->int_status_active_user,
+					$this->int_id_user
+				];
 			} else {
 				$sql = "UPDATE users 
 							SET id_role_user = ?, 
@@ -114,15 +124,16 @@
 								cell_phone_user = ?, 
 								email_user = ?, 
 								status_active_user = ? 
-							WHERE id_user = $this->int_id_user";
-				$data = array(
+							WHERE id_user = ?";
+				$data = [
 					$this->int_id_role_user,
 					$this->str_first_names_user,
 					$this->str_last_names_user,
 					$this->str_cell_phone_user,
 					$this->str_email_user,
-					$this->int_status_active_user
-				);
+					$this->int_status_active_user,
+					$this->int_id_user
+				];
 			}
 			$request = $this->update($sql, $data);
 			$return = $request;
@@ -132,10 +143,11 @@
 		public function delete_user(int $id_user){
 			$this->int_id_user = $id_user;
 			$this->status_deleted_user = 1;
-			$sql = "UPDATE users SET status_deleted_user = ? WHERE id_user = $this->int_id_user";
-			$data = array(
-				$this->status_deleted_user
-			);
+			$sql = "UPDATE users SET status_deleted_user = ? WHERE id_user = ?";
+			$data = [
+				$this->status_deleted_user,
+				$this->int_id_user
+			];
 			$request = $this->update($sql, $data);
 			$return = $request;
 	        return $return;
