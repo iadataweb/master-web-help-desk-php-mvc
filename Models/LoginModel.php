@@ -16,9 +16,16 @@
 			$this->str_email = $email;
 			$this->str_password = $password;
 			$sql = "SELECT id_user, password_user, status_active_user FROM users WHERE 
-					email_user = '$this->str_email'";
-			$request = $this->select($sql);
-			if (!password_verify($password, $request['password_user'])) {
+					email_user = ?";
+			$data = [
+				$this->str_email
+			];
+			$request = $this->select($sql, $data);
+			if ($request) {
+				if (!password_verify($password, $request['password_user'])) {
+					$request = false;
+				}
+			} else {
 				$request = false;
 			}
 			return $request;
