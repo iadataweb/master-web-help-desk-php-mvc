@@ -19,27 +19,23 @@
 		}
 
 		public function insert_new_ticket(int $id_user, string $title, int $category, int $subcategory, int $priority, string $description){
-
 			$this->int_id_user = $id_user;
 			$this->str_title = $title;
 			$this->int_id_category = $category;
 			$this->int_id_subcategory = $subcategory;
 			$this->int_id_priority = $priority ;
 			$this->str_description = $description;
-			
 			$query_insert = "INSERT INTO tickets(id_user_ticket, id_category_ticket, id_subcategory_ticket, id_priority_ticket, title_ticket, description_ticket) VALUES(?,?,?,?,?,?)";
-
-			$data = array(
+			$data = [
 				$this->int_id_user,
 				$this->int_id_category,
 				$this->int_id_subcategory,
 				$this->int_id_priority,
 				$this->str_title,
-				$this->str_description);
-
+				$this->str_description
+			];
 			$request_insert = $this->insert($query_insert, $data);
 	        $return = $request_insert;
-
 	        return $return;
 		}
 
@@ -57,14 +53,16 @@
 					id_subcategory_ticket = ?, 
 					id_priority_ticket = ?, 
 					title_ticket = ?,
-					description_ticket = ? WHERE id_ticket = $this->int_id_ticket";
-			$data = array(
+					description_ticket = ? WHERE id_ticket = ?";
+			$data = [
 				$this->int_id_user,
 				$this->int_id_category,
 				$this->int_id_subcategory,
 				$this->int_id_priority,
 				$this->str_title,
-				$this->str_description);
+				$this->str_description,
+				$this->int_id_ticket
+			];
 			$request = $this->update($sql, $data);
 			$return = $request;
 	        return $return;
@@ -72,29 +70,27 @@
 
 		public function delete_attachment_ticket(int $id_attachment_ticket){
 			$this->int_id_attachment_ticket = $id_attachment_ticket;
-			$query  = "DELETE FROM attachments_ticket WHERE id_attachment_ticket = $this->int_id_attachment_ticket";
-	        $request = $this->delete($query);
+			$query  = "DELETE FROM attachments_ticket WHERE id_attachment_ticket = ?";
+			$data = [
+				$this->int_id_attachment_ticket
+			];
+	        $request = $this->delete($query, $data);
 	        return $request;
 		}
 
 		public function insert_attachment_ticket(int $id_ticket, string $file_path, string $file_name) {
-            
 			$query_insert = "INSERT INTO attachments_ticket(id_ticket_attachment_ticket, route_attachment_ticket, name_attachment_ticket) VALUES(?, ?, ?)";
-        
-            $data = array(
-                $id_ticket,
+			$data = [
+				$id_ticket,
                 $file_path,
 				$file_name
-            );
-
+			];
             $request_insert = $this->insert($query_insert, $data);
             return $request_insert;
         }
 		
 		public function select_all_my_tickets(int $id_user){
-			
 			$this->int_id_user = $id_user;
-
 			$sql = "SELECT 	t.id_ticket,
 							c.name_category,
 							t.title_ticket,
@@ -109,15 +105,16 @@
 					INNER JOIN categories c ON t.id_category_ticket = c.id_category
 					INNER JOIN priorities p ON t.id_priority_ticket = p.id_priority
 					LEFT JOIN users u ON t.id_support_assigned_ticket = u.id_user
-					WHERE t.id_user_ticket = $this->int_id_user AND t.status_active_ticket = 1 AND t.status_deleted_ticket = 0 ";
-					$request = $this->select_all($sql);
+					WHERE t.id_user_ticket = ? AND t.status_active_ticket = 1 AND t.status_deleted_ticket = 0 ";
+			$data = [
+				$this->int_id_user
+			];
+			$request = $this->select_all($sql, $data);
 			return $request;
 		}
 
 		public function select_tickets_by_support(int $id_user){
-			
 			$this->int_id_user = $id_user;
-
 			$sql = "SELECT 	t.id_ticket,
 							c.name_category,
 							t.title_ticket,
@@ -132,8 +129,11 @@
 					INNER JOIN categories c ON t.id_category_ticket = c.id_category
 					INNER JOIN priorities p ON t.id_priority_ticket = p.id_priority
 					LEFT JOIN users u ON t.id_support_assigned_ticket = u.id_user
-					WHERE t.id_support_assigned_ticket = $this->int_id_user AND t.status_active_ticket = 1 AND t.status_deleted_ticket = 0 ";
-					$request = $this->select_all($sql);
+					WHERE t.id_support_assigned_ticket = ? AND t.status_active_ticket = 1 AND t.status_deleted_ticket = 0";
+			$data = [
+				$this->int_id_user
+			];
+			$request = $this->select_all($sql);
 			return $request;
 		}
 
@@ -152,8 +152,8 @@
 					INNER JOIN categories c ON t.id_category_ticket = c.id_category
 					INNER JOIN priorities p ON t.id_priority_ticket = p.id_priority
 					LEFT JOIN users u ON t.id_support_assigned_ticket = u.id_user
-					WHERE t.status_active_ticket != 0 AND t.status_deleted_ticket = 0 ";
-					$request = $this->select_all($sql);
+					WHERE t.status_active_ticket != 0 AND t.status_deleted_ticket = 0";
+			$request = $this->select_all($sql);
 			return $request;
 		}
 
@@ -181,8 +181,11 @@
 					INNER JOIN priorities p ON t.id_priority_ticket = p.id_priority
 					LEFT JOIN users u ON t.id_user_ticket = u.id_user
 					LEFT JOIN users su ON t.id_support_assigned_ticket = su.id_user
-					WHERE t.id_ticket = $this->int_id_ticket";
-					$request = $this->select($sql);
+					WHERE t.id_ticket = ?";
+			$data = [
+				$this->int_id_ticket
+			];
+			$request = $this->select($sql, $data);
 			return $request;
 		}
 
@@ -194,40 +197,36 @@
 							a.name_attachment_ticket
 					FROM attachments_ticket a 
 					INNER JOIN tickets t ON a.id_ticket_attachment_ticket = t.id_ticket
-					WHERE a.id_ticket_attachment_ticket = $this->int_id_ticket";
-					$request = $this->select_all($sql);
+					WHERE a.id_ticket_attachment_ticket = ?";
+			$data = [
+				$this->int_id_ticket
+			];
+			$request = $this->select_all($sql, $data);
 			return $request;
 		}
 
 		public function insert_new_message(int $id_ticket, int $id_user, string $message){
-
 			$this->int_id_ticket = $id_ticket;
 			$this->int_id_user = $id_user;
 			$this->str_message= $message;
-			
 			$query_insert = "INSERT INTO messages(id_ticket_message, id_user_message, content_message) VALUES(?,?,?)";
-
-			$data = array(
+			$data = [
 				$this->int_id_ticket,
 				$this->int_id_user,
-				$this->str_message);
-
+				$this->str_message
+			];
 			$request_insert = $this->insert($query_insert, $data);
 	        $return = $request_insert;
-
 	        return $return;
 		}
 
 		public function insert_attachment_message(int $id_message, string $file_path, string $file_name) {
-            
-			$query_insert = "INSERT INTO attachments_message(id_message_attachment_message, route_attachment_message, name_attachment_message) VALUES(?, ?, ?)";
-        
-            $data = array(
-                $id_message,
+			$query_insert = "INSERT INTO attachments_message(id_message_attachment_message, route_attachment_message, name_attachment_message) VALUES(?,?,?)";
+			$data = [
+				$id_message,
                 $file_path,
 				$file_name
-            );
-
+			];
             $request_insert = $this->insert($query_insert, $data);
             return $request_insert;
         }
@@ -240,8 +239,11 @@
 							m.date_created_message
 					FROM messages m 
 					INNER JOIN users u ON m.id_user_message = u.id_user
-					WHERE m.id_ticket_message = $this->int_id_ticket";
-					$request = $this->select_all($sql);
+					WHERE m.id_ticket_message = ?";
+			$data = [
+				$this->int_id_ticket
+			];
+			$request = $this->select_all($sql, $data);
 			return $request;
 		}
 
@@ -252,13 +254,15 @@
 							a.name_attachment_message
 					FROM attachments_message a 
 					INNER JOIN messages m ON a.id_message_attachment_message = m.id_message
-					WHERE m.id_ticket_message = $this->int_id_ticket";
-					$request = $this->select_all($sql);
+					WHERE m.id_ticket_message = ?";
+			$data = [
+				$this->int_id_ticket
+			];
+			$request = $this->select_all($sql, $data);
 			return $request;
 		}
 
-		public function show_support()
-		{
+		public function show_support(){
 			$sql = "SELECT 	u.id_user, 
 							u.first_names_user, 
 							u.last_names_user 
@@ -275,10 +279,11 @@
 		public function update_support(int $id_ticket, int $id_support_assigned_ticket){
 			$this->int_id_ticket = $id_ticket;
 			$this->int_id_support_assigned_ticket = $id_support_assigned_ticket;
-			$sql = "UPDATE tickets SET id_support_assigned_ticket = ?, date_assigned_ticket = NOW() WHERE id_ticket = $this->int_id_ticket";
-			$data = array(
-				$this->int_id_support_assigned_ticket
-			);
+			$sql = "UPDATE tickets SET id_support_assigned_ticket = ?, date_assigned_ticket = NOW() WHERE id_ticket = ?";
+			$data = [
+				$this->int_id_support_assigned_ticket,
+				$this->int_id_ticket
+			];
 			$request = $this->update($sql, $data);
 			$return = $request;
 	        return $return;
@@ -287,7 +292,9 @@
 		public function close_ticket(int $id_ticket){
 			$this->int_id_ticket = $id_ticket;
 			$sql = "UPDATE tickets SET status_open_ticket = ?, date_closed_ticket = NOW() WHERE id_ticket = $this->int_id_ticket";
-			$data = array(0);
+			$data = [
+				0
+			];
 			$request = $this->update($sql, $data);
 			$return = $request;
 	        return $return;
@@ -296,7 +303,9 @@
 		public function reopen_ticket(int $id_ticket){
 			$this->int_id_ticket = $id_ticket;
 			$sql = "UPDATE tickets SET status_open_ticket = ?, date_closed_ticket = NULL WHERE id_ticket = $this->int_id_ticket";
-			$data = array(1);
+			$data = [
+				1
+			];
 			$request = $this->update($sql, $data);
 			$return = $request;
 	        return $return;
@@ -305,10 +314,11 @@
 		public function delete_ticket(int $id_ticket){
 			$this->int_id_ticket = $id_ticket;
 			$this->int_status_deleted_ticket = 1;
-			$sql = "UPDATE tickets SET status_deleted_ticket = ? WHERE id_ticket = $this->int_id_ticket ";
-			$data = array(
-				$this->int_status_deleted_ticket
-			);
+			$sql = "UPDATE tickets SET status_deleted_ticket = ? WHERE id_ticket = ?";
+			$data = [
+				$this->int_status_deleted_ticket,
+				$this->int_id_ticket
+			];
 			$request = $this->update($sql, $data);
 			$return = $request;
 	        return $return;
