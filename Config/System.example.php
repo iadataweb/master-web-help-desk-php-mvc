@@ -17,6 +17,12 @@
     const DB_PASSWORD = "";  // Contraseña de la base de datos
     const DB_CHARSET = "";   // Charset de la base de datos (ej., utf8)
 
+    //Configuración para el envío de correo
+	const METHOD_EMAIL = 0; // Apagado:0 Local: 1;
+
+    //Configuración para el envío de notificación
+	const METHOD_NOTIFICATION = 1; // Activar:0 Desactivar: 1;
+
     // Configuración de Módulos del Sistema
     const MODULE_DASHBOARD = 1;
     const MODULE_USER_MANAGEMENT = 2;
