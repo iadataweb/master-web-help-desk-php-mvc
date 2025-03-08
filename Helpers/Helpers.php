@@ -177,10 +177,17 @@
             </html>
         ";
 
-        $user_id = $ticket_data['id_user_ticket'];
-        create_ticket_notification($id_ticket, $user_id, $notification_message);
+        if (METHOD_NOTIFICATION != 0) {
+            $user_id = $ticket_data['id_user_ticket'];
+            create_ticket_notification($id_ticket, $user_id, $notification_message);
+        }
+
+        if (METHOD_EMAIL != 0) {
+            send_ticket_notification($user_email, $subject, $email_message_html);
+            
+        }
     
-        return send_ticket_notification($user_email, $subject, $email_message_html);
+        return;
     }
 
     function create_ticket_notification($id_ticket, $user_id, $notification_message){
