@@ -322,7 +322,30 @@
 				$id_ticket = $request_new_ticket;
 
 				if ($id_ticket) {
-					notify_ticket($id_ticket, "opened");
+					if (METHOD_EMAIL != 0) {
+						try {
+							$loop = Factory::create();
+							$promise = new Promise(function ($resolve, $reject) use ($id_ticket) {
+								try {
+									notify_ticket($id_ticket, "opened");
+									$resolve("Notificación enviada.");
+								} catch (Exception $e) {
+									$reject("Error en notify_ticket: " . $e->getMessage());
+								}
+							});
+					
+							$promise->then(
+								function ($message) { error_log($message); },
+								function ($error) { error_log($error); }
+							);
+					
+							$loop->run();
+						} catch (Throwable $e) {
+							error_log("Error general en ReactPHP: " . $e->getMessage());
+						}
+
+						// notify_ticket($id_ticket, "opened");
+					}
 					// Ahora insertar los archivos asociados al ticket
 					if ($files) {
 						upload_attachments_ticket($files, $id_ticket);
@@ -653,7 +676,9 @@
 				$int_id_ticket = trim($_POST['id_ticket']);
 				$int_id_support_assigned_ticket = trim($_POST['id_user']);
 				$request_support = $this->model->update_support($int_id_ticket , $int_id_support_assigned_ticket);
-				notify_ticket($int_id_ticket, "assigned");
+				if (METHOD_EMAIL != 0 || METHOD_NOTIFICATION != 0) {
+					notify_ticket($int_id_ticket, "assigned");
+				}
 				if ($request_support) {
 					$response = array("status" => true, "type" => "success", "message" => "Asignado correctamente.");
 				} else {
@@ -696,7 +721,9 @@
 				}
 				$int_id_ticket = trim($_POST['id_ticket']);
 				$request_close_ticket = $this->model->close_ticket($int_id_ticket);
-				notify_ticket($int_id_ticket, "closed");
+				if (METHOD_EMAIL != 0 || METHOD_NOTIFICATION != 0) {
+					notify_ticket($int_id_ticket, "closed");
+				}
 				if ($request_close_ticket) {
 					$response = array("status" => true, "type" => "success", "message" => "Ticket cerrado correctamente.");
 				} else {
@@ -739,9 +766,12 @@
 				}
 				$int_id_ticket = trim($_POST['id_ticket']);
 				$request_reopen_ticket = $this->model->reopen_ticket($int_id_ticket);
-				notify_ticket($int_id_ticket, "reopened");
+				if (METHOD_EMAIL != 0 || METHOD_NOTIFICATION != 0) {
+					notify_ticket($int_id_ticket, "reopened");
+				}
 				if ($request_reopen_ticket) {
 					$response = array("status" => true, "type" => "success", "message" => "Ticket abierto correctamente.");
+					$status_notify = true;
 				} else {
 					$response = array("status" => false, "type" => "error", "message" => "No se pudo reabrir el ticket.");
 				}
