@@ -187,6 +187,6 @@ El proyecto es de código abierto bajo la licencia MIT. Puedes ver más detalles
 
 ## Contacto
 
-Carlos Injante - [LinkedIn](https://www.linkedin.com/in/20ismael1999/)
+Ismael Injante - [LinkedIn](https://www.linkedin.com/in/20ismael1999/)
 
 <p align="center">¡Gracias por visitar mi proyecto!</p>
